@@ -278,7 +278,8 @@ def pdf_insert(
     srcreader = PdfReader(srcfile)
 
     # if no page numbers are given insert all pages
-    index = limit(index - 1, 0, len(destreader.pages))
+    if index is not None:
+        index = limit(index - 1, 0, len(destreader.pages))
     if pages is None:
         for i, page in enumerate(srcreader.pages):
             if index is None:
