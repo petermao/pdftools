@@ -28,6 +28,10 @@ On OSX, I had to go into `~/Library/Python/<python-version>/lib/python/site-pack
 *pdftools* adds some scripts to your existing Python installation that can be called via the command line.
 The description for each script is listed below.
 
+In cases where a bare arguent, like `dest` or `src`, follows a switch with an
+indefinite number of arguments, like `--pages` or `--sequence`, use `--` to
+separate the bare argument from the switch arguments.
+
 ### pdftools
 
 ```
@@ -77,29 +81,30 @@ optional arguments:
 ### Copy
 
 ```
-usage: pdftools copy [-h] [-o OUTPUT] [-p PAGES [PAGES ...]] [-y] src
+usage: pdftools copy [-h] [-p PAGES [PAGES ...]] [-o OUTPUT] [-y] src
 
 Copy specific pages of a PDF file in a new file
 
 positional arguments:
   src                   Source PDF containing pages to copy
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
-  -o OUTPUT, --output OUTPUT
-                        Name of the output file. If None, the `dest` file will
-                        be overwritten (default: None)
   -p PAGES [PAGES ...], --pages PAGES [PAGES ...]
                         list of pages to copy in the new file. Examples: "5 8
                         10": Pages 5, 8, 10; "1-9": Pages 1 to 9; "5-": Pages
                         from 5 to last page; "-9": Pages from beginning to 9
                         (default: 1)
+  -o OUTPUT, --output OUTPUT
+                        Name of the output file. If None, the `dest` file will
+                        be overwritten (default: None)
+  -y                    yes to all (default: False)
 ```
 
 ### Insert
 
 ```
-usage: pdftools insert [-h] [-o OUTPUT] [-p PAGES [PAGES ...]] [-i INDEX]
+usage: pdftools insert [-h] [-p PAGES [PAGES ...]] [-i INDEX] [-o OUTPUT]
                        dest src
 
 Insert pages of one file into another
@@ -108,11 +113,8 @@ positional arguments:
   dest                  Destination PDF file
   src                   Source PDF file
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
-  -o OUTPUT, --output OUTPUT
-                        Name of the output file. If None, the `dest` file will
-                        be overwritten (default: None)
   -p PAGES [PAGES ...], --pages PAGES [PAGES ...]
                         List of page numbers (start with 1) which will be
                         inserted. If None, all pages will be inserted
@@ -121,6 +123,9 @@ optional arguments:
                         Page number (1-indexed) of destination file where the
                         pages will be inserted. If None they will be added at
                         the end of the file (default: None)
+  -o OUTPUT, --output OUTPUT
+                        Name of the output file. If None, the `dest` file will
+                        be overwritten (default: None)
 ```
 
 ### Remove
@@ -173,8 +178,8 @@ optional arguments:
 ### Split
 
 ```
-usage: pdftools split [-h] [-o OUTPUT] [-s STEPSIZE]
-                      [-q SEQUENCE [SEQUENCE ...]]
+usage: pdftools split [-h] [-s STEPSIZE] [-q SEQUENCE [SEQUENCE ...]]
+                      [-o OUTPUT]
                       src
 
 Split a PDF file into multiple documents
@@ -182,34 +187,34 @@ Split a PDF file into multiple documents
 positional arguments:
   src                   Source file to be split
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
-  -o OUTPUT, --output OUTPUT
-                        Output filenames. If None, will append page numbers to
-                        the input file name. (default: None)
   -s STEPSIZE, --stepsize STEPSIZE
                         How many pages are packed in each output file
                         (default: 1)
   -q SEQUENCE [SEQUENCE ...], --sequence SEQUENCE [SEQUENCE ...]
                         Sequence of numbers describing how many pages to put
                         in each outputfile (default: None)
+  -o OUTPUT, --output OUTPUT
+                        Output filenames. If None, will append page numbers to
+                        the input file name. (default: None)
 ```
 
 ### Merge
 
 ```
-usage: pdftools merge [-h] [-o OUTPUT] [-d] src [src ...]
+usage: pdftools merge [-h] [-d] [-o OUTPUT] src [src ...]
 
 Merge the pages of multiple input files into one output file
 
 positional arguments:
   src                   List of input source files
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
+  -d, --delete          Delete source files after merge (default: False)
   -o OUTPUT, --output OUTPUT
                         Output filename (default: merged.pdf)
-  -d, --delete          Delete source files after merge (default: False)
 ```
 
 ### Zip

@@ -55,13 +55,6 @@ def main():
         "src", type=str, default=None, help="Source PDF containing pages to copy"
     )
     parser_copy.add_argument(
-        "-o",
-        "--output",
-        type=str,
-        default=None,
-        help="Name of the output file. If None, the `dest` file will be overwritten",
-    )
-    parser_copy.add_argument(
         "-p",
         "--pages",
         dest="pages",
@@ -74,6 +67,13 @@ def main():
         '"1-9":    Pages 1 to 9; '
         '"5-":     Pages from 5 to last page; '
         '"-9":     Pages from beginning to 9',
+    )
+    parser_copy.add_argument(
+        "-o",
+        "--output",
+        type=str,
+        default=None,
+        help="Name of the output file. If None, the `dest` file will be overwritten",
     )
     parser_copy.add_argument("-y", action="store_true", help="yes to all")
 
@@ -88,13 +88,6 @@ def main():
     parser_insert.add_argument("dest", type=str, help="Destination PDF file")
     parser_insert.add_argument("src", type=str, help="Source PDF file")
     parser_insert.add_argument(
-        "-o",
-        "--output",
-        type=str,
-        default=None,
-        help="Name of the output file. If None, the `dest` file will be overwritten",
-    )
-    parser_insert.add_argument(
         "-p",
         "--pages",
         nargs="+",
@@ -106,6 +99,13 @@ def main():
         type=int,
         default=None,
         help="Page number (1-indexed) of destination file where the pages will be inserted. If None they will be added at the end of the file",
+    )
+    parser_insert.add_argument(
+        "-o",
+        "--output",
+        type=str,
+        default=None,
+        help="Name of the output file. If None, the `dest` file will be overwritten",
     )
 
     # Merge
@@ -120,10 +120,10 @@ def main():
         "src", type=str, default=None, nargs="+", help="List of input source files"
     )
     parser_merge.add_argument(
-        "-o", "--output", type=str, default="merged.pdf", help="Output filename",
+        "-d", "--delete", action="store_true", help="Delete source files after merge",
     )
     parser_merge.add_argument(
-        "-d", "--delete", action="store_true", help="Delete source files after merge",
+        "-o", "--output", type=str, default="merged.pdf", help="Output filename",
     )
 
     # Remove
@@ -140,7 +140,6 @@ def main():
         nargs="+",
         help="List of pages to remove from file. Examples: 5; 1-9; 1-; -9",
     )
-    # output
     parser_remove.add_argument(
         "-o",
         "--output",
@@ -200,13 +199,6 @@ def main():
         "src", type=str, default=None, help="Source file to be split",
     )
     parser_split.add_argument(
-        "-o",
-        "--output",
-        type=str,
-        default=None,
-        help="Output filenames. If None, will append page numbers to the input file name.",
-    )
-    parser_split.add_argument(
         "-s",
         "--stepsize",
         dest="stepsize",
@@ -220,6 +212,13 @@ def main():
         dest="sequence",
         nargs="+",
         help="Sequence of numbers describing how many pages to put in each outputfile",
+    )
+    parser_split.add_argument(
+        "-o",
+        "--output",
+        type=str,
+        default=None,
+        help="Output filenames. If None, will append page numbers to the input file name.",
     )
 
     # Zip
