@@ -81,7 +81,7 @@ optional arguments:
 ### Copy
 
 ```
-usage: pdftools copy [-h] [-p PAGES [PAGES ...]] [-o OUTPUT] [-y] src
+usage: pdftools copy [-h] [-f] [-p PAGES [PAGES ...]] [-o OUTPUT] src
 
 Copy specific pages of a PDF file in a new file
 
@@ -90,6 +90,8 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
+  -f, --force           Caution!! Answers "Yes" to all overwrite queries.
+                        (default: False)
   -p PAGES [PAGES ...], --pages PAGES [PAGES ...]
                         list of pages to copy in the new file. Examples: "5 8
                         10": Pages 5, 8, 10; "1-9": Pages 1 to 9; "5-": Pages
@@ -98,7 +100,6 @@ options:
   -o OUTPUT, --output OUTPUT
                         Name of the output file. If None, the `dest` file will
                         be overwritten (default: None)
-  -y                    yes to all (default: False)
 ```
 
 ### Insert
@@ -131,7 +132,7 @@ options:
 ### Remove
 
 ```
-usage: pdftools remove [-h] [-o OUTPUT] src pages [pages ...]
+usage: pdftools remove [-h] [-f] [-o OUTPUT] src pages [pages ...]
 
 Remove pages from a PDF file
 
@@ -140,8 +141,10 @@ positional arguments:
   pages                 List of pages to remove from file. Examples: 5; 1-9;
                         1-; -9
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
+  -f, --force           Caution!! Answers "Yes" to all overwrite queries.
+                        (default: False)
   -o OUTPUT, --output OUTPUT
                         Name of the output file. If None, the `src` file will
                         be overwritten (default: None)

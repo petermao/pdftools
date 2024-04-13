@@ -55,6 +55,10 @@ def main():
         "src", type=str, default=None, help="Source PDF containing pages to copy"
     )
     parser_copy.add_argument(
+        "-f", "--force",
+        action="store_true",
+        help='Caution!! Answers "Yes" to all overwrite queries.')
+    parser_copy.add_argument(
         "-p",
         "--pages",
         dest="pages",
@@ -75,7 +79,6 @@ def main():
         default=None,
         help="Name of the output file. If None, the `dest` file will be overwritten",
     )
-    parser_copy.add_argument("-y", action="store_true", help="yes to all")
 
     # Insert
     # --------------------------------------------
@@ -136,6 +139,10 @@ def main():
     )
     parser_remove.add_argument("src", type=str, default=None, help="PDF source file")
     parser_remove.add_argument(
+        "-f", "--force",
+        action="store_true",
+        help='Caution!! Answers "Yes" to all overwrite queries.')
+    parser_remove.add_argument(
         "pages",
         nargs="+",
         help="List of pages to remove from file. Examples: 5; 1-9; 1-; -9",
@@ -147,10 +154,6 @@ def main():
         default=None,
         help="Name of the output file. If None, the `src` file will be overwritten",
     )
-    parser_remove.add_argument(
-        "-f", "--force",
-        action="store_true",
-        help='Caution!! Answers "Yes" to all overwrite queries.')
 
     # Rotate
     # --------------------------------------------
@@ -266,7 +269,7 @@ def main():
     elif ARGS.command == "copy":
         from pdftools.pdftools import pdf_copy
 
-        pdf_copy(ARGS.src, ARGS.output, ARGS.pages, ARGS.y)
+        pdf_copy(ARGS.src, ARGS.output, ARGS.pages, ARGS.force)
     elif ARGS.command == "insert":
         from pdftools.pdftools import pdf_insert
 
